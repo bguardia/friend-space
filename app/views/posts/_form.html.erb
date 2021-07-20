@@ -1,0 +1,13 @@
+<% post_form_label ||= "Post something"
+   post_form_submit ||= "Share"
+%>
+
+<%= form_with model: post do |f| %>
+        <div class="field">
+            <%= f.label :body, post_form_label, class: "label" %>
+            <div class="control">
+                <%= f.text_area :body, class: "textarea has-fixed-size", rows: 5, placeholder: "Share your thoughts" %>
+            </div>
+        </div>
+        <%= f.submit post_form_submit, class:"button is-info" %>
+<% end %>

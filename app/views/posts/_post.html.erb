@@ -1,0 +1,25 @@
+<div class="box">
+    <p><%= post.user.profile.firstname %> <%= post.user.profile.lastname %></p>
+    <small><%= distance_of_time_in_words(DateTime.current, post.created_at) %> ago</small>
+    
+    <div class="content">
+        <%= post.body %>
+    </div>
+    <hr />
+    <div class="level">
+    <div class="level-item">
+        <%= link_to "Like", "#" %>
+    </div>
+    <div class="level-item">
+        <%= link_to "Comment", new_post_comment_path(post) %>
+    </div>
+    </div>
+    <% post.comments.each do |comment| %>
+        <div class="box">
+        <p><%= comment.user.profile.firstname %> <%= post.user.profile.lastname %></p>
+        <div class="content">
+            <%= comment.body %>
+        </div>
+        </div>
+    <%end %>
+</div>

@@ -11,6 +11,26 @@
   </head>
 
   <body>
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <%= link_to root_path do %>
+        <h1 class="title is-3">FriendSpace</h1>
+      <% end %>
+      <a href="" class="navbar-burger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <button class="button is-info">Sign Out</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
     <%= yield %>
   </body>
 </html>
