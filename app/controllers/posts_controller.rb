@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
     before_action :authenticate_user!
-    
+
     def index
         @posts = Post.all
         @post = Post.new
@@ -15,7 +15,7 @@ class PostsController < ApplicationController
     end
 
     def create
-        @post = Post.new(post_params)
+        @post = current_user.posts.build(post_params)
 
         if @post.save
             flash[:notice] = "Successfully created post"
@@ -73,6 +73,11 @@ class PostsController < ApplicationController
         end
 
         @post.destroy
+    end
+
+    private
+    def post_params
+        params.require(:post).permit(:body)
     end
 
 end
