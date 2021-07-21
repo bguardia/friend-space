@@ -1,6 +1,31 @@
 <div class="box">
-    <p><%= post.user.profile.firstname %> <%= post.user.profile.lastname %></p>
-    <small><%= distance_of_time_in_words(DateTime.current, post.created_at) %> ago</small>
+    <div class="level">
+    <div class="level-left">
+        <div class="level-item">
+            <figure class="image is-64x64">
+                <img src="https://via.placeholder.com/64" alt="" class="is-rounded">
+            </figure>
+        </div>
+        <div class="level-item">
+            <div>
+            <p class="title is-5">
+            <%= link_to user_path(post.user) do %>
+                <%= post.user.profile.firstname %> <%= post.user.profile.lastname %>
+            <% end %>
+            </p>
+            <p class="heading"><%= distance_of_time_in_words(DateTime.current, post.created_at) %> ago</p>
+            </div>
+        </div>
+    </div>
+
+        <% if user_signed_in? && current_user == post.user %>
+            <div class="level-right">
+                <div class="level-item">
+                    <%= link_to "Edit", edit_post_path(post) %>
+                </div>
+            </div>
+        <% end %>
+    </div>
     
     <div class="content">
         <%= post.body %>
