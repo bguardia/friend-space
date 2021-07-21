@@ -6,6 +6,6 @@ Rails.application.routes.draw do
     resources :comments, shallow: true
   end
   resources :comments, only: [:edit, :update, :destroy]
-
+  resources :users, only: [:show]
   root to: "posts#index"
 end
