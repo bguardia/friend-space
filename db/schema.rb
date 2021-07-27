@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_19_123206) do
+ActiveRecord::Schema.define(version: 2021_07_27_023149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,27 @@ ActiveRecord::Schema.define(version: 2021_07_19_123206) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "friend_requests", force: :cascade do |t|
+    t.bigint "sender_id"
+    t.bigint "receiver_id"
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["receiver_id"], name: "index_friend_requests_on_receiver_id"
+    t.index ["sender_id"], name: "index_friend_requests_on_sender_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.string "status"
+    t.string "type"
+    t.bigint "notifiable_id"
+    t.string "notifiable_type"
+    t.bigint "receiver_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["receiver_id"], name: "index_notifications_on_receiver_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.text "body"
     t.bigint "user_id"
@@ -85,4 +106,7 @@ ActiveRecord::Schema.define(version: 2021_07_19_123206) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "friend_requests", "users", column: "receiver_id"
+  add_foreign_key "friend_requests", "users", column: "sender_id"
+  add_foreign_key "notifications", "users", column: "receiver_id"
 end
