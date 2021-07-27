@@ -17,18 +17,21 @@ class FriendRequestsController < ApplicationController
     end
 
     def update
-        @friend_request = FriendRequest.find_by(id: params[:id])
-        if current_user.id == @friend_request.receiver_id
+        begin
+            @friend_request = current_user.friend_requests.find(params[:id])
             @friend_request.status = friend_request_params[:status]
             if @friend_request.save
                 flash[:notice] = "Successfully responded to friend request"
+                #Add friend if user accepted request
+                current_user.friends << @friend_request.sender if @friend_request.status == "Accepted"
             else
-                flash.now[:alert] = "Something went wrong responding to request"
+                flash[:alert] = "Something went wrong responding to request"
             end
-            redirect_back fallback_location: { action: 'index' }
-        else
-            flash.now[:alert] = "This request is for another user"
+        rescue
+            flash[:alert] = "Friend request not found"
         end
+        
+        redirect_back fallback_location: { action: 'index' }
     end
 
     private
