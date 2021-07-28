@@ -6,14 +6,16 @@ class FriendRequestsController < ApplicationController
     end
 
     def create
-        @friend_request = FriendRequest.new(sender_id: current_user, 
-                                            receiver_id: params[:receiver_id],
+        @friend_request = FriendRequest.new(sender_id: current_user.id, 
+                                            receiver_id: friend_request_params[:receiver_id],
                                             status: "Unanswered")
         if @friend_request.save
             flash[:notice] = "Successfully sent friend request"
         else
-            flash.now[:alert] = "Something went wrong sending your request"
+            flash[:alert] = "Something went wrong sending your request"
         end
+
+        redirect_back fallback_location: "posts#index"
     end
 
     def update
@@ -36,6 +38,6 @@ class FriendRequestsController < ApplicationController
 
     private
     def friend_request_params
-        params.require(:friend_request).permit(:status)
+        params.require(:friend_request).permit(:status, :receiver_id)
     end
 end
