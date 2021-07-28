@@ -1,6 +1,37 @@
 <section class="section">
 <div class="columns">
-<div class="column is-half is-offset-one-quarter">
+
+<div class="column is-one-quarter">
+    <div class="panel">
+        <div class="panel-heading">
+            Me
+        </div>
+        <div class="panel-block">
+            <div class="media">
+                <figure class="media-left">
+                    <p class="image is-128x128">
+                        <img src="http://via.placeholder.com/128" alt="" class="is-rounded">
+                    </p>
+                </figure>
+            
+                <div class="media-content">
+                    <div class="content">
+                        <p class="title is-5"><%= "#{current_user.profile.firstname} #{current_user.profile.lastname}"%></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-block">
+            <%= link_to "My Profile", user_path(current_user) %>
+        </div>
+
+        <div class="panel-block">
+            <%= link_to "Friends", friends_path %>
+        </div>
+    </div>
+</div>
+
+<div class="column is-half">
 
 <div class="box">
     <%= render 'form', post: @post %>
