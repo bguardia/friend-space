@@ -5,10 +5,11 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments, shallow: true
   end
-  
+
   resources :comments, only: [:edit, :update, :destroy]
   resources :users, only: [:show]
   resources :friend_requests, only: [:index, :create, :update]
+  resources :friends, controller: :friendships, only: [:index] #show friends list
 
   root to: "posts#index"
 end
