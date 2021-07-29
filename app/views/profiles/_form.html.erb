@@ -1,0 +1,43 @@
+<%= form_with model: profile do |f| %>
+    <div class="field">
+        <%= f.label :firstname, class: "label" %>
+        <div class="control">
+            <%= f.text_field :firstname, class: "input" %>
+        </div>
+        <% profile.errors.full_messages_for(:firstname).each do |msg| %>
+            <p class="help is-danger"><%= msg %></p>
+        <% end %>
+    </div>
+
+    <div class="field">
+        <%= f.label :lastname, class: "label" %>
+        <div class="control">
+            <%= f.text_field :lastname, class: "input" %>
+        </div>
+        <% profile.errors.full_messages_for(:lastname).each do |msg| %>
+            <p class="help is-danger"><%= msg %></p>
+        <% end %>
+    </div>
+
+    <div class="field">
+        <%= f.label :bio, class: "label" %>
+        <div class="control">
+            <%= f.text_area :bio, class: "textarea", placeholder: "Tell us about yourself" %>
+        </div>
+        <% profile.errors.full_messages_for(:bio).each do |msg| %>
+            <p class="help is-danger"><%= msg %></p>
+        <% end %>
+    </div>
+
+    <div class="field">
+        <%= f.label :birthday, class: "label" %>
+        <div class="control">
+            <%= f.date_field :birthday, class: "input" %>
+        </div>
+        <% profile.errors.full_messages_for(:birthday).each do |msg| %>
+            <p class="help is-danger"><%= msg %></p>
+        <% end %>
+    </div>
+
+    <%= f.submit "Create Profile", class: "button is-info" %>
+<% end %>
