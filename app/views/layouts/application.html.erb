@@ -29,6 +29,11 @@
     </div>
     <div class="navbar-menu">
       <div class="navbar-end">
+        <div class="navbar-item">
+          <%= link_to notifications_path do %>
+            <button class="button is-info">Notifications</button>
+          <% end %>
+        </div>
         <% if user_signed_in? %>
         <div class="navbar-item">
           <%= link_to destroy_user_session_path, method: :delete, data: { confirm: "Are you sure you'd like to sign out?" } do %>

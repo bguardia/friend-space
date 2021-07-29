@@ -1,0 +1,17 @@
+<section class="section">
+    <div class="columns">
+        <div class="column is-one-third is-offset-one-third">
+            <h2 class="title is-3">Notifications</h2>
+                <% if @notifications.unarchived.empty? %>
+                <div class="content">
+                    Looks like you don't have any notifications at the moment.
+                </div>
+                <% end %>
+                <% @notifications.unarchived.each do |notification| %>
+                    <div class="box <%= notification.status == "Unread" ? "has-background-info-light" : "" %>">
+                        <%= render notification.partial, notification: notification %>
+                    </div>
+                <% end %>
+        </div>
+    </div>
+</section>

@@ -14,6 +14,10 @@ class FriendRequest < ApplicationRecord
         self.find_by(sender_id: user_two.id, receiver_id: user_one.id)
     end
 
+    def pending?
+        self.status == "Unanswered"
+    end
+
     private
     def no_self_friendship
         errors.add(:receiver_id, "can't be yourself") unless sender != receiver

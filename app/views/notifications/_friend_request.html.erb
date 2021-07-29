@@ -1,0 +1,56 @@
+<% sender = notification.notifiable.sender %>
+<% sender_name = "#{sender.profile.firstname} #{sender.profile.lastname}" %>
+
+<div class="media">
+    <figure class="media-left">
+        <div class="image is-64x64">
+            <img src="https://via.placeholder.com/64" alt="" class="is-rounded">
+        </div>
+    </figure>
+    <div class="media-content">
+        <% if notification.notifiable.pending? %>
+            <div class="content">
+                    <p><%= link_to sender_name, user_path(sender) %> has sent you a friend request.</p>
+            </div>
+            <div class="level">
+                <div class="level-item">
+                    <%= form_with model: notification.notifiable do |f| %>
+                        <%= f.hidden_field :status, value: "Accepted" %>
+                        <%= f.submit "Accept", class: "button is-success" %>
+                    <% end %>
+                </div>
+                <div class="level-item">
+                    <%= form_with model: notification.notifiable do |f| %>
+                        <%= f.hidden_field :status, value: "Declined" %>
+                        <%= f.submit "Decline", class: "button is-danger" %>
+                    <% end %>
+                </div>
+            </div>
+        <% else %>
+            <div class="content">
+                <p>You <%= notification.notifiable.status.downcase %> <%= link_to sender_name, user_path(sender) %>'s friend request</p>
+            </div>
+        <% end %>
+    </div>
+    
+    <div class="media-right">
+        <div class="level">
+            <div class="level-item">
+                <%= form_with url: "notifications/#{notification.id}", method: :patch do |f| %>
+                    <%= f.hidden_field :status, value: "Archived" %>
+                    <%= f.submit "Archive" %>
+                <% end %>
+            </div>
+            <% unless notification.status == "Read" %>
+                <div class="level-item">
+                    <%= form_with url: "notifications/#{notification.id}", method: :patch do |f| %>
+                        <%= f.hidden_field :status, value: "Read" %>
+                        <%= f.submit "Mark as Read" %>
+                    <% end %>
+                </div>
+            <% end %>
+            
+        </div>
+        
+    </div>
+</div>
