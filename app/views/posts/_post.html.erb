@@ -63,11 +63,28 @@
     </div>
     
     <% post.comments.each do |comment| %>
-        <div class="box">
-        <p><%= comment.user.profile.firstname %> <%= post.user.profile.lastname %></p>
-        <div class="content">
-            <%= comment.body %>
-        </div>
+        <div class="media">
+            <figure class="media-left">
+                <div class="image is-64x64">
+                    <img src="https://via.placeholder.com/64" alt="" class="is-rounded">
+                </div>
+            </figure>
+            <div class="media-content">
+                <p><%= comment.user.profile.firstname %> <%= comment.user.profile.lastname %></p>
+                <div class="content">
+                    <%= comment.body %>
+                </div>
+            </div>
+            <% if comment.user == current_user %>
+                <div class="media-right">
+                    <%= link_to edit_comment_path(comment) do %>
+                        Edit
+                    <% end %>
+                    <%= link_to comment_path(comment), method: :delete do %>
+                        Delete
+                    <% end %>
+                </div>
+            <% end %>
         </div>
     <%end %>
 </div>

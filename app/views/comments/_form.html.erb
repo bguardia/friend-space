@@ -1,0 +1,10 @@
+<%= form_with model: comment do |f| %>
+    <div class="field">
+        <%= f.label :body, "Comment", class: "label" %>
+        <div class="control">
+            <%= f.text_area :body, class: "textarea" %>
+        </div>
+    </div>
+
+    <%= f.submit "Comment", class: "button is-info" %>
+<% end %>
