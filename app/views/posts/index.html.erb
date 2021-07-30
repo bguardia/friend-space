@@ -10,7 +10,8 @@
             <div class="media">
                 <figure class="media-left">
                     <p class="image is-128x128">
-                        <img src="http://via.placeholder.com/128" alt="" class="is-rounded">
+                        <% img_src = current_user.profile.avatar.attached? ? url_for(current_user.profile.avatar) : "http://via.placeholder.com/128" %>
+                        <img src=<%= img_src %> alt="" class="is-rounded">
                     </p>
                 </figure>
             
