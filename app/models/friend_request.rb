@@ -1,4 +1,10 @@
 class FriendRequest < ApplicationRecord
+
+    after_create do
+        self.create_friend_request_notification(receiver_id: self.receiver_id,
+                                                status: "Unread")
+    end
+
     has_one :friend_request_notification, as: :notifiable
     belongs_to :sender, class_name: "User"
     belongs_to :receiver, class_name: "User"
