@@ -4,7 +4,7 @@
 <div class="media">
     <figure class="media-left">
         <div class="image is-64x64">
-            <% img_src = sender.profile.avatar.attached? ? url_for(sender.profile.avatar) : "https://via.placeholder.com/64" %>
+            <% img_src = sender.profile.avatar.attached? ? url_for(sender.profile.avatar.variant(resize_to_fill: [64, 64])) : "https://via.placeholder.com/64" %>
             <img src=<%= img_src %> alt="" class="is-rounded">
         </div>
     </figure>

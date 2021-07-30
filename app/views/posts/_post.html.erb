@@ -3,7 +3,7 @@
     <div class="level-left">
         <div class="level-item">
             <figure class="image is-64x64">
-                <% img_src = post.user.profile.avatar.attached? ? url_for(post.user.profile.avatar) : "https://via.placeholder.com/64" %>
+                <% img_src = post.user.profile.avatar.attached? ? url_for(post.user.profile.avatar.variant(resize_to_fill: [64, 64])) : "https://via.placeholder.com/64" %>
                 <img src=<%= img_src %> alt="" class="is-rounded">
             </figure>
         </div>
@@ -67,7 +67,7 @@
         <div class="media">
             <figure class="media-left">
                 <div class="image is-64x64">
-                    <% c_img_src = comment.user.profile.avatar.attached? ? url_for(comment.user.profile.avatar) : "https://via.placeholder.com/64" %>
+                    <% c_img_src = comment.user.profile.avatar.attached? ? url_for(comment.user.profile.avatar.variant(resize_to_fill: [64, 64])) : "https://via.placeholder.com/64" %>
                     <img src=<%= c_img_src %> alt="" class="is-rounded">
                 </div>
             </figure>
