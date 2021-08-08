@@ -1,24 +1,5 @@
 <div class="box">
-    <div class="level">
-    <div class="level-left">
-        <div class="level-item">
-            <figure class="image is-64x64">
-                <% img_src = post.user.profile.avatar.attached? ? url_for(post.user.profile.avatar.variant(resize_to_fill: [64, 64])) : "https://via.placeholder.com/64" %>
-                <img src=<%= img_src %> alt="" class="is-rounded">
-            </figure>
-        </div>
-        <div class="level-item">
-            <div>
-            <p class="title is-5">
-            <%= link_to user_path(post.user) do %>
-                <%= post.user.profile.firstname %> <%= post.user.profile.lastname %>
-            <% end %>
-            </p>
-            <p class="heading"><%= distance_of_time_in_words(DateTime.current, post.created_at) %> ago</p>
-            </div>
-        </div>
-    </div>
-
+    <%= render 'users/user_media_label', user: post.user, media: post do |section| %>
         <% if user_signed_in? && current_user == post.user %>
             <div class="level-right">
                 <div class="level-item">
@@ -26,7 +7,7 @@
                 </div>
             </div>
         <% end %>
-    </div>
+    <% end %>
     
     <div class="content">
         <%= post.body %>
@@ -64,6 +45,7 @@
     </div>
     
     <% post.comments.each do |comment| %>
+
         <div class="media">
             <figure class="media-left">
                 <div class="image is-64x64">
@@ -72,7 +54,11 @@
                 </div>
             </figure>
             <div class="media-content">
-                <p><%= comment.user.profile.firstname %> <%= comment.user.profile.lastname %></p>
+                <p class="title is-6">
+                <%= link_to user_path(comment.user) do %>
+                    <%= comment.user.profile.firstname %> <%= comment.user.profile.lastname %>
+                <% end %>
+                </p>
                 <div class="content">
                     <%= comment.body %>
                 </div>
@@ -88,5 +74,5 @@
                 </div>
             <% end %>
         </div>
-    <%end %>
+    <% end %>
 </div>

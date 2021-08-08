@@ -1,0 +1,37 @@
+<% if current_user.friends.exists?(user.id) %>
+        <div class="content has-text-centered">
+            <p>You are friends with <%= "#{user.profile.firstname} #{user.profile.lastname}" %></p>
+        </div>
+    <% else %>
+        <% if FriendRequest.exists_between?(current_user, user) %>
+            <% if current_user.sent_friend_requests.pending.exists?(receiver_id: user.id) %>
+                <div class="content has-text-centered">
+                    <p>You have sent <%= "#{user.profile.firstname} #{user.profile.lastname}" %> a friend request</p>
+                </div>
+            <% elsif friend_request = current_user.friend_requests.pending.find_by(sender_id: user.id) %>
+                <div class="level">
+                    <div class="level-item">
+                        <%= form_with model: friend_request do |f| %>
+                            <%= f.hidden_field :status, value: "Accepted" %>
+                            <%= f.submit "Accept", class: "button is-info" %>
+                        <% end %>
+                    </div>
+                    <div class="level-item">
+                        <%= form_with model: friend_request do |f| %>
+                            <%= f.hidden_field :status, value: "Declined" %>
+                            <%= f.submit "Decline", class: "button is-danger" %>
+                        <% end %>
+                    </div>
+                </div>
+            <% end %>
+        <% elsif user != current_user %>
+           <div class="level">
+                <div class="level-item">
+                    <%= form_with model: FriendRequest.new do |f| %>
+                        <%= f.hidden_field :receiver_id, value: user.id %>
+                        <%= f.submit "Send Friend Request", class: "button is-info" %>
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
+    <% end %>
