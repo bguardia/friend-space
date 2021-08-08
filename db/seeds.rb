@@ -6,6 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+$LOAD_PATH << File.expand_path(File.dirname(__FILE__))
+require "user_seeds"
+
+=begin
 days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
 user_names = ["Yuvaan Palmer",
@@ -62,6 +66,8 @@ users_data.each do |data|
     u.create_profile(data[:profile]) unless u.nil?
 end
 puts "#{Profile.all.count} profiles successfully created."
+=end 
 
+UserSeeder.seed
 
 
