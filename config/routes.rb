@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :likes, only: [:destroy]
 
   resources :comments, only: [:edit, :update, :destroy]
-  resources :users, only: [:show]
+  resources :users, only: [:show, :index]
   resources :friend_requests, only: [:index, :create, :update]
   resources :friends, controller: :friendships, only: [:index] #show friends list
   
