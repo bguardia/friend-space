@@ -8,25 +8,24 @@
 
 <div class="column is-half">
 
-<div class="box">
-    <div class="media">
-    <div class="media-left">
-        <figure class="image is-128x128">
-            <% img_src = @user.profile.avatar.attached? ? url_for(@user.profile.avatar.variant(resize_to_fill: [128, 128])) : "https://via.placeholder.com/128" %>
-            <img class="is-rounded" src=<%= img_src %>>
-        </figure>
-    </div>
+<div class="box profile-panel">
+    
+    <figure class="image is-128x128 profile-panel-image">
+        <% img_src = @user.profile.avatar.attached? ? url_for(@user.profile.avatar.variant(resize_to_fill: [128, 128])) : "https://via.placeholder.com/128" %>
+        <img class="is-rounded" src=<%= img_src %>>
+    </figure>
 
-    <div class="media-right">
-    <h2 class="title is-3"><%= "#{@user.profile.firstname} #{@user.profile.lastname}" %></h2>
+    <h2 class="title is-3 has-text-centered"><%= "#{@user.profile.firstname} #{@user.profile.lastname}" %></h2>
     <div class="content">
-        <small>birthday: <%= @user.profile.birthday %></small><br />
-        <% if @user.profile.city && @user.profile.country %>
-            <small>location: <%= @user.profile.city %>, <%= @user.profile.country %></small>
-        <% end %>
-        <p><%= @user.profile.bio %></p>
-    </div>
-    </div>
+        <p>
+            <span class="title is-6">About Me</span><br />
+            <span>Birthday: <%= @user.profile.birthday.strftime('%B %-d') %></span><br />
+            <% if @user.profile.city && @user.profile.country %>
+                <span>Location: <%= @user.profile.city %>, <%= @user.profile.country %></span>
+            <% end %>
+        </p>
+        
+        <p class="is-size-5"><%= @user.profile.bio %></p>
     </div>
     
     <%= render 'users/user_friendship', user: @user %>
