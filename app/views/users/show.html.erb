@@ -19,7 +19,9 @@
     <div class="content">
         <p>
             <span class="title is-6">About Me</span><br />
-            <span>Birthday: <%= @user.profile.birthday.strftime('%B %-d') %></span><br />
+            <% if @user.profile.birthday %>
+                <span>Birthday: <%= @user.profile.birthday.strftime('%B %-d') %></span><br />
+            <% end %>
             <% if @user.profile.city && @user.profile.country %>
                 <span>Location: <%= @user.profile.city %>, <%= @user.profile.country %></span>
             <% end %>
