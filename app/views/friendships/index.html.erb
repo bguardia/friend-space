@@ -1,25 +1,17 @@
 <section class="section">
 <div class="columns">
-<div class="column is-half is-offset-one-quarter">
+
+<div class="column is-one-quarter">
+    <%= render 'shared/user_panel' %>
+</div>
+
+<div class="column is-half">
 <h2 class="title is-3">Friends</h2>
+    <p>You have <%= friend_count = @friends.count %> friend<%= friend_count == 1 ? "" : "s" %></p>
     <% @friends.each do |friend| %>
-        <div class="media">
-            <figure class="media-left"> 
-                <p class="image is-64x64">
-                    <img src="http://via.placeholder.com/64" alt="" class="is-rounded">
-                </p>
-            </figure>
-                
-            <div class="media-content">
-                <div class="content">
-                    <%= link_to user_path(friend) do %>
-                        <p class="title is-6"><%= "#{friend.profile.firstname} #{friend.profile.lastname}" %></p>
-                    <% end %>
-                </div>
-            </div>
-            
-        </div>
+        <%= render 'users/user', user: friend %>
     <% end %>
+    
 </div>
 </div>
 </section>

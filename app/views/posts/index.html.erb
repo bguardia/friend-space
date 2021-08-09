@@ -2,34 +2,7 @@
 <div class="columns">
 
 <div class="column is-one-quarter">
-    <div class="panel">
-        <div class="panel-heading">
-            Me
-        </div>
-        <div class="panel-block">
-            <div class="media">
-                <figure class="media-left">
-                    <p class="image is-128x128">
-                        <% img_src = current_user.profile.avatar.attached? ? url_for(current_user.profile.avatar.variant(resize_to_fill: [128, 128])) : "http://via.placeholder.com/128" %>
-                        <img src=<%= img_src %> alt="" class="is-rounded">
-                    </p>
-                </figure>
-            
-                <div class="media-content">
-                    <div class="content">
-                        <p class="title is-5"><%= "#{current_user.profile.firstname} #{current_user.profile.lastname}"%></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="panel-block">
-            <%= link_to "My Profile", user_path(current_user) %>
-        </div>
-
-        <div class="panel-block">
-            <%= link_to "Friends", friends_path %>
-        </div>
-    </div>
+    <%= render 'shared/user_panel' %>
 </div>
 
 <div class="column is-half">

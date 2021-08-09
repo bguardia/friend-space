@@ -16,3 +16,15 @@
 
  @import 'bulma';
  
+ .profile-panel {
+     position: relative;
+     padding-top: 69px;
+     margin-top: 64px;
+ }
+
+ .profile-panel-image {
+    position: absolute;
+    top: -64px;
+    left: 50%;
+    transform: translate(-50%, 0);
+ }

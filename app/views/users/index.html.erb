@@ -1,6 +1,12 @@
 <section class="section">
     <div class="columns">
-        <div class="column is-half is-offset-one-quarter">
+
+        <div class="column is-one-quarter">
+            <%= render 'shared/user_panel' %>
+        </div>
+
+        <div class="column is-half">
+            <h2 class="title is-3">Users</h2>
             <% @users.each do |user| %>
                 <div class="box">
                     <%= render 'users/user', user: user %>

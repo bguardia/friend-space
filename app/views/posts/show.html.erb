@@ -1,6 +1,11 @@
 <section class="section">
     <div class="columns">
-        <div class="column is-half is-offset-one-quarter">
+
+        <div class="column is-one-quarter">
+            <%= render 'shared/user_panel' %>
+        </div>
+
+        <div class="column is-half">
             <%= render 'post', post: @post %>
         </div>
     </div>

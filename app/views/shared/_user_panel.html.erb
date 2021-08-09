@@ -1,0 +1,28 @@
+
+<div class="panel is-info">
+        <div class="panel-heading profile-panel">
+                <div class="image is-128x128 profile-panel-image">
+                    <% img_src = current_user.profile.avatar.attached? ? url_for(current_user.profile.avatar.variant(resize_to_fill: [128, 128])) : "http://via.placeholder.com/128" %>
+                    <img src=<%= img_src %> alt="" class="is-rounded">
+                </div>
+
+                <div class="content has-text-centered">
+                    <p class="title is-5 has-text-white"><%= "#{current_user.profile.firstname} #{current_user.profile.lastname}"%></p>
+                </div>
+        </div>
+        <div class="panel-block">
+            <%= link_to "My Profile", user_path(current_user) %>
+        </div>
+
+        <div class="panel-block">
+            <%= link_to "Friends", friends_path %>
+        </div>
+
+        <div class="panel-block">
+            <%= link_to "Pending Friend Requests", friend_requests_path %>
+        </div>
+
+        <div class="panel-block">
+            <%= link_to "Add Friends", users_path %>
+        </div>
+    </div>
