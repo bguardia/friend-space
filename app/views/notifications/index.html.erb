@@ -1,6 +1,11 @@
 <section class="section">
     <div class="columns">
-        <div class="column is-one-third is-offset-one-third">
+
+        <div class="column is-one-quarter">
+            <%= render 'shared/user_panel' %>
+        </div>
+
+        <div class="column is-half">
             <h2 class="title is-3">Notifications</h2>
                 <% if @notifications.unarchived.empty? %>
                 <div class="content">

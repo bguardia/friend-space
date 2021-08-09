@@ -3,6 +3,7 @@ class FriendRequestsController < ApplicationController
 
     def index
         @friend_requests = current_user.friend_requests.all
+        @sent_friend_requests = current_user.sent_friend_requests.all
     end
 
     def create
