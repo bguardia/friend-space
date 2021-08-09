@@ -72,6 +72,7 @@ class PostsController < ApplicationController
         end
 
         @post.destroy
+        redirect_to 'index'
     end
 
     private
