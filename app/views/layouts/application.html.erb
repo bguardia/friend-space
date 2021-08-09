@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <script src="https://kit.fontawesome.com/bcdbdb9739.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -30,8 +30,8 @@
     <div class="navbar-menu">
       <div class="navbar-end">
         <div class="navbar-item">
-          <%= link_to notifications_path do %>
-            <button class="button is-info">Notifications</button>
+          <%= link_to notifications_path, class: "button is-info" do %>
+            <i class="fas fa-bell"></i>
           <% end %>
         </div>
         <% if user_signed_in? %>

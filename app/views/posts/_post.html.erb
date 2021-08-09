@@ -3,7 +3,14 @@
         <% if user_signed_in? && current_user == post.user %>
             <div class="level-right">
                 <div class="level-item">
-                    <%= link_to "Edit", edit_post_path(post) %>
+                    <%= link_to edit_post_path(post) do %>
+                        <i class="fas fa-edit"></i>
+                    <% end %>
+                </div>
+                <div class="level-item">
+                    <%= link_to post_path(post), method: :delete do %>
+                        <i class="fas fa-trash"></i>
+                    <% end %>
                 </div>
             </div>
         <% end %>
@@ -66,10 +73,10 @@
             <% if comment.user == current_user %>
                 <div class="media-right">
                     <%= link_to edit_comment_path(comment) do %>
-                        Edit
+                        <i class="fas fa-edit"></i>
                     <% end %>
                     <%= link_to comment_path(comment), method: :delete do %>
-                        Delete
+                        <i class="fas fa-trash"></i>
                     <% end %>
                 </div>
             <% end %>
