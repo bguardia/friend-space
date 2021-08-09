@@ -10,19 +10,58 @@
                     <p class="title is-5 has-text-white"><%= "#{current_user.profile.firstname} #{current_user.profile.lastname}"%></p>
                 </div>
         </div>
-        <div class="panel-block">
-            <%= link_to "My Profile", user_path(current_user) %>
-        </div>
 
-        <div class="panel-block">
-            <%= link_to "Friends", friends_path %>
-        </div>
+        
+        <%= link_to posts_path, class: "panel-block" do %>
+            <span class="panel-icon">
+                <i class="fas fa-home"></i>
+            </span>
+            Timeline
+        <% end %>
+        
 
-        <div class="panel-block">
-            <%= link_to "Pending Friend Requests", friend_requests_path %>
-        </div>
+        
+        <%= link_to user_path(current_user), class: "panel-block" do %>
+            <span class="panel-icon">
+                <i class="fas fa-user-circle"></i>
+            </span>
+            My Profile
+        <% end %>
+    
 
-        <div class="panel-block">
-            <%= link_to "Add Friends", users_path %>
-        </div>
+        
+        <%= link_to friends_path, class: "panel-block" do %>
+            <span class="panel-icon">
+                <i class="fas fa-user-friends"></i>
+            </span>
+            Friends
+        <% end %>
+        
+
+        
+        <%= link_to notifications_path, class: "panel-block" do %>
+            <span class="panel-icon">
+                <i class="fas fa-bell"></i>
+            </span>
+            Notifications
+        <% end %>
+        
+
+        
+        <%= link_to friend_requests_path, class: "panel-block" do %>
+            <span class="panel-icon">
+                <i class="fas fa-envelope-open-text"></i>
+            </span>
+            Pending Friend Requests
+        <% end %>
+        
+
+        
+        <%= link_to users_path, class: "panel-block" do %>
+            <span class="panel-icon">
+                <i class="fas fa-users"></i>
+            </span>
+            Add Friends
+        <% end %>
+        
     </div>
