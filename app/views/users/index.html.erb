@@ -8,9 +8,11 @@
         <div class="column is-half">
             <h2 class="title is-3">Users</h2>
             <% @users.each do |user| %>
-                <div class="box">
-                    <%= render 'users/user', user: user %>
-                </div>
+                
+                    <div class="box">
+                        <%= render 'users/user', user: user %>
+                    </div>
+                
             <% end %>
         </div>
     </div>
