@@ -21,7 +21,7 @@ class PostsController < ApplicationController
             redirect_to @post 
         else
             flash.now[:alert] = "Unable to create post"
-            render 'new'
+            redirect_back fallback_location: 'new'
         end
     end
 
@@ -77,7 +77,7 @@ class PostsController < ApplicationController
 
     private
     def post_params
-        params.require(:post).permit(:body)
+        params.require(:post).permit(:body, :image)
     end
 
 end

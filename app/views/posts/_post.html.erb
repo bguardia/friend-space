@@ -17,7 +17,17 @@
     <% end %>
     
     <div class="content">
-        <%= post.body %>
+    <% if post.body %>
+        <p>
+            <%= post.body %>
+        </p>
+        
+    <% end %>
+    <% if post.image.attached? %>
+        <figure class="image">
+            <%= image_tag(post.image) %>
+        </figure>
+    <% end %>
     </div>
     <hr />
     <div class="level">

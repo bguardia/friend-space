@@ -33,6 +33,12 @@
     <%= render 'users/user_friendship', user: @user %>
 </div>
 
+<% if @user == current_user %>
+    <div class="box">
+        <%= render 'posts/form', post: Post.new %>
+    </div>
+<% end %>
+
 <% @user.posts.each do |post| %>
     <%= render 'posts/post', post: post %>
 <% end %>

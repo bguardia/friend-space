@@ -9,5 +9,12 @@
                 <%= f.text_area :body, class: "textarea has-fixed-size", rows: 5, placeholder: "Share your thoughts" %>
             </div>
         </div>
+
+        <div class="field">
+            <%= f.label :image, "Upload an image", class: "label" %>
+            <div class="control">
+                <%= f.file_field :image, class: "input" %>
+            </div>
+        </div>
         <%= f.submit post_form_submit, class:"button is-info" %>
 <% end %>
