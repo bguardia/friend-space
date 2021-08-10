@@ -14,6 +14,7 @@
         </div>
         <% end %>
         <% @friend_requests.each do |friend_request| %>
+            <% sender = friend_request.sender %>
             <div class="box">
                 <div class="level">
                     <div class="level-left">
@@ -25,8 +26,8 @@
                     </div>
                     <div class="level-item">
                         <div>
-                            <%= link_to user_path(friend_request.sender) do %>
-                                <p class="title is-5"><%= "#{friend_request.sender.profile.firstname} #{friend_request.sender.profile.lastname}" %></p>
+                            <%= link_to user_path(sender) do %>
+                                <p class="title is-5"><%= "#{sender.profile.firstname} #{sender.profile.lastname}" %></p>
                             <% end %>
                         </div>
                     </div>
@@ -80,10 +81,8 @@
                     </div>
                 </div>
                 <% if friend_request.status == "Unanswered" %>
-                    <div class="level">
-                    <div class="content">
+                    <div class="content has-text-centered">
                         <p><%= receiver_name %> hasn't responded to your friend request.</p>
-                    </div>
                     </div>
                 <% else %>
                     <div class="content has-text-centered">
