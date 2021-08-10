@@ -12,7 +12,7 @@ module UserSeeder
         File.open(USER_DATA_PATH, "r") do |f|
             f.each_line { |l| data += l }
         end
-        data
+        JSON.parse(data)
     rescue SystemCallError => e
         puts "#{e.class.name}: #{USER_DATA_PATH} not found."
         nil
@@ -44,15 +44,15 @@ module UserSeeder
     def self.organize_user_data(data)
         puts "Reorganizing user data..."
         @@organized_data = data.map do |user_hash|
-            {   email: user_hash["email"], 
-                password: "1234567890",
-                password_confirmation: "1234567890",
-                profile: { firstname: user_hash["name"]["first"],
-                            lastname: user_hash["name"]["last"],
-                            birthday: user_hash["dob"], 
-                            city: user_hash["location"]["city"], 
-                            country: user_hash["location"]["country"], 
-                            picture: user_hash["picture"]["large"] } 
+            {   "email" => user_hash["email"], 
+                "password" => "1234567890",
+                "password_confirmation" => "1234567890",
+                "profile" => { "firstname" => user_hash["name"]["first"],
+                            "lastname" => user_hash["name"]["last"],
+                            "birthday" => user_hash["dob"]["date"], 
+                            "city" => user_hash["location"]["city"], 
+                            "country" => user_hash["location"]["country"], 
+                            "picture" => user_hash["picture"]["large"] } 
             }
         end
     end
@@ -87,13 +87,13 @@ module UserSeeder
         #Only attempt to store in DB if directories exist
         if File.exist?(USER_DATA_PATH) && File.directory?(PROFILE_PICS_DIR)
             puts "Getting user data..."
-            @@organized_data ||= JSON.parse self.retrieve_user_data
-
+            @@organized_data ||= self.retrieve_user_data
+            
             puts "Storing users in database..."
             begin 
                 @@organized_data.each do |user_hash|
-                    profile_hash = user_hash.delete(:profile)
-                    pic_file_path = profile_hash.delete(:picture)
+                    profile_hash = user_hash.delete("profile")
+                    pic_file_path = profile_hash.delete("picture")
                     u = User.create(user_hash)
                     u.create_profile(profile_hash)
                     u.profile.avatar.attach(io: File.open(pic_file_path), 

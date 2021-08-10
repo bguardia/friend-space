@@ -8,6 +8,7 @@
 
 $LOAD_PATH << File.expand_path(File.dirname(__FILE__))
 require "user_seeds"
+require "post_seeds"
 
 =begin
 days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
@@ -68,6 +69,38 @@ end
 puts "#{Profile.all.count} profiles successfully created."
 =end 
 
+#User seeds
+#UserSeeder generates random users using RandomUser.me API
 UserSeeder.seed
+#Test account
+User.create(email: "test@test.com",
+            password: "1234567890",
+            password_confirmation: "1234567890")
 
+#Friend seeds
+puts "Creating friends..."
+prng = Random.new
+users = User.all
+users[1..15].each do |user|
+    while(user.friends.count < 5) do
+        friend = users[prng.rand(users.length)]
+        unless user.id == friend.id || user.friends.exists?(friend.id) 
+            Friendship.create(user_id: user.id, friend_id: friend.id)
+        end
+    end
+end
 
+#Friend Requests
+puts "Creating friend requests..."
+users[20..30].each do |user|
+    receivers = User.not_friends_with(user).not_pending_with(user).limit(5)
+    receivers.each do |receiver|
+        unless user.id == receiver.id || FriendRequest.exists_between?(user, receiver)
+            user.friend_requests.create(receiver_id: receiver.id, status: "Unanswered")
+        end
+    end
+end
+
+#Posts
+puts "Creating posts..."
+PostSeeder.seed
