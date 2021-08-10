@@ -30,6 +30,12 @@
         <p class="is-size-5"><%= @user.profile.bio %></p>
     </div>
     
+    <% if @user == current_user %>
+        <%= link_to edit_profile_path(@user.profile), class: "profile-edit" do %>
+            <i class="fas fa-edit"></i>
+        <% end %>
+    <% end %>
+
     <%= render 'users/user_friendship', user: @user %>
 </div>
 

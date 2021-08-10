@@ -40,6 +40,20 @@
     </div>
 
     <div class="field">
+        <%= f.label :city, class: "label" %>
+        <div class="control">
+            <%= f.text_field :city, class: "input" %>
+        </div>
+    </div>
+
+    <div class="field">
+        <%= f.label :country, class: "label" %>
+        <div class="control">
+            <%= f.text_field :country, class: "input" %>
+        </div>
+    </div>
+
+    <div class="field">
         <%= f.label :avatar, "Profile picture", class: "label" %>
         <div class="control">
             <%= f.file_field :avatar, class: "input" %>
