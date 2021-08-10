@@ -7,10 +7,17 @@
 
 <div class="column is-half">
 <h2 class="title is-3">Friends</h2>
-    <p>You have <%= friend_count = @friends.count %> friend<%= friend_count == 1 ? "" : "s" %></p>
-    <% @friends.each do |friend| %>
-        <%= render 'users/user', user: friend %>
-    <% end %>
+    <div class="block">
+            <p>You have <%= friend_count = @friends.count %> friend<%= friend_count == 1 ? "" : "s" %></p>
+    </div>
+    <div class="block">
+        <% @friends.each do |friend| %>
+            <div class="box">
+                <%= render 'users/user', user: friend, hide_friendship_status: true %>
+            </div>
+        <% end %>
+    </div>
+    
     
 </div>
 </div>
