@@ -1,3 +1,5 @@
+<% hide_friendship_status ||= false %>
+
 <div class="level">
     <div class="level-left">
         <div class="level-item">
@@ -17,5 +19,6 @@
         </div>
     </div>
 </div>
-
-<%= render 'users/user_friendship', user: user %>
+<% unless hide_friendship_status %>
+    <%= render 'users/user_friendship', user: user %>
+<% end %>
