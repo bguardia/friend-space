@@ -1,10 +1,19 @@
 class UsersController < ApplicationController
 
     def index
-        @users = User.not_friends_with(current_user).not_pending_with(current_user).includes(:profile, :friend_requests).all
+        if params.key?(:username)
+            name_query = "%#{params.fetch(:username, "")}%"
+            @users = User.includes(:friend_requests, :friends)
+                         .joins(profile: [:avatar_blob])
+                         .where("CONCAT(profiles.firstname, ' ', profiles.lastname) ILIKE ?", name_query)
+                         .all
+        else
+            @users = User.includes(:friend_requests, :friends, profile: [:avatar_blob]).all
+        end
     end
 
     def show
         @user = User.find_by(id: params[:id])
     end
+
 end
