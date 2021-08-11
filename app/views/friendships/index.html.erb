@@ -1,3 +1,7 @@
+<% if params.key?(:username) && params[:username] != "" %>
+    <% match_text = " matching the name \"#{params[:username]}\"."%>
+<% end %>
+
 <section class="section">
 <div class="columns">
 
@@ -8,8 +12,24 @@
 <div class="column is-half">
 <h2 class="title is-3">Friends</h2>
     <div class="block">
-            <p>You have <%= friend_count = @friends.count %> friend<%= friend_count == 1 ? "" : "s" %></p>
+            <p>You have <%= friend_count = @friends.count %> friend<%= friend_count == 1 ? "" : "s" %><%= match_text.nil? ? "" : match_text %></p>
     </div>
+
+    
+    <div class="block">
+        <%= form_with url: friends_path, method: :get do |f| %>
+            <div class="field has-addons">
+                <div class="control has-icons-left is-expanded">
+                    <%= f.text_field :username, class: "input", placeholder: "Search users" %>
+                    <span class="icon is-small is-left"><i class="fas fa-search"></i></span>
+                </div>
+                <div class="control">
+                    <%= f.submit "Search", class: "button is-info" %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+
     <div class="block">
         <% @friends.each do |friend| %>
             <div class="box">
