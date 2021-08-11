@@ -7,15 +7,20 @@
 
         <div class="column is-half">
             <h2 class="title is-3">Users</h2>
-            <%= form_with url: users_path, method: :get do |f| %>
-                <div class="field">
-                    <div class="control has-icons-left">
-                        <%= f.text_field :username, class: "input", placeholder: "Search users" %>
-                        <span class="icon is-small is-left"><i class="fas fa-search"></i></span>
+            <div class="block">
+                <%= form_with url: users_path, method: :get do |f| %>
+                    <div class="field has-addons">
+                        <div class="control has-icons-left is-expanded">
+                            <%= f.text_field :username, class: "input", placeholder: "Search users" %>
+                            <span class="icon is-small is-left"><i class="fas fa-search"></i></span>
+                        </div>
+                        <div class="control">
+                            <%= f.submit "Search", class: "button is-info" %>
+                        </div>
                     </div>
-                </div>
-                <%= f.submit "Search" %>
-            <% end %>
+                <% end %>
+            </div>
+            
 
             <% @users.each do |user| %>
                 
