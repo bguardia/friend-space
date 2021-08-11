@@ -9,6 +9,9 @@
                     <p>You have sent <%= "#{user.profile.firstname} #{user.profile.lastname}" %> a friend request</p>
                 </div>
             <% elsif friend_request = current_user.friend_requests.pending.find_by(sender_id: user.id) %>
+                <div class="content has-text-centered">
+                    <p><%= "#{user.profile.firstname} #{user.profile.lastname}" %> has sent you a friend request</p>
+                </div>
                 <div class="level">
                     <div class="level-item">
                         <%= form_with model: friend_request do |f| %>
