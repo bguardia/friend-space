@@ -3,6 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  devise :omniauthable, omniauth_providers: %i[facebook]
   
   has_one :profile
   has_many :posts
@@ -19,4 +20,23 @@ class User < ApplicationRecord
   has_many :friendships
   has_many :friends, through: :friendships
   scope :not_friends_with, ->(user) { where.not(id: joins(:friendships).select(:friend_id).where(id: user.id)).where.not(id: user.id)}
+
+  def from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20]
+      user.create_profile(firstname: auth.info.first_name,
+                          lastname: auth.info.last_name,
+                          avatar: auth.info.image)
+    end
+  end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+        user.email = data["email"] if user.email.blank?
+      end
+    end
+  end
+  
 end
