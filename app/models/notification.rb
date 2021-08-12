@@ -5,6 +5,7 @@ class Notification < ApplicationRecord
     valid_statuses = ["Unread", "Read", "Archived"]
     validates :status, inclusion: { in: valid_statuses }
 
+    default_scope { order(created_at: :desc) }
     scope :unarchived, -> { where.not(status: "Archived") }
     
     def partial

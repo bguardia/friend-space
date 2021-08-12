@@ -1,0 +1,37 @@
+<% commenter = notification.notifiable.user %>
+<% post = notification.notifiable.post %>
+
+<div class="media">
+    <figure class="media-left">
+        <div class="image is-64x64">
+            <% img_src = commenter.profile.avatar.attached? ? url_for(commenter.profile.avatar.variant(resize_to_fill: [64, 64])) : "https://via.placeholder.com/64" %>
+            <img src=<%= img_src %> alt="" class="is-rounded">
+        </div>
+    </figure>
+
+    <div class="media-content">
+        <p><%= "#{commenter.profile.firstname} #{commenter.profile.lastname}" %> commented on <%= link_to "your post", post_path(post) %>.</p>
+    </div>
+    
+    <div class="media-right">
+        <% unless notification.status == "Read" %>
+            <%= form_with url: "notifications/#{notification.id}", method: :patch do |f| %>
+                <%= f.hidden_field :status, value: "Read" %>
+                <button type="submit" class="button">
+                    <span class="icon">
+                        <i class="fas fa-envelope-open-text"></i>
+                    </span>   
+                </button>
+            <% end %>
+        <% end %>
+        <%= form_with url: "notifications/#{notification.id}", method: :patch do |f| %>
+            <%= f.hidden_field :status, value: "Archived" %>
+            <button type="submit" class="button">
+                <span class="icon">
+                    <i class="fas fa-archive"></i>
+                </span>
+            </button>
+        <% end %>
+
+    </div>
+</div>
