@@ -81,6 +81,32 @@
                     </div>
                 <% end %>
         </div>
+
+        <% if current_user.friends.exists?(@user.id) %>
+            <div class="panel is-info">
+                <div class="panel-heading has-text-centered">
+                    Poke <%= @user.profile.firstname %>
+                </div>
+                <div class="panel-block">
+                    <div class="content">
+                        <% pokes = Poke.all.where(sender_id: current_user,
+                                           receiver_id: @user.id) %>
+
+                        <p>You have poked <%= "#{@user.profile.firstname} #{@user.profile.lastname}"%> <%= count = pokes.count %> <%= count == 1 ? "time" : "times" %>.</p>
+                    </div>
+                </div>
+                <div class="panel-block is-justify-content-center">
+                        <%= form_with model: Poke.new do |f| %>
+                            <%= f.hidden_field :receiver_id, value: "#{@user.id}"%>
+                            <%= f.submit "Poke", class: "button is-info" %>
+                        <% end %>
+                </div>
+                    
+                </div>
+            </div>
+        <% end %>
     </div>
+
+    
 </div>
 </section>

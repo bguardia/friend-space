@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+poke_one:
+  sender: friend_one
+  receiver: friend_two
+
+poke_two:
+  sender: friend_two
+  receiver: friend_one

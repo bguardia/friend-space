@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   resources :friend_requests, only: [:index, :create, :update]
   resources :friends, controller: :friendships, only: [:index] #show friends list
   
+  resources :pokes, only: [:create]
+
   resources :notifications, only: [:index, :update]
   resource :profile, except: [:show, :destroy]
   resolve('Profile') { [:profile] }
