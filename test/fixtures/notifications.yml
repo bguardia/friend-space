@@ -4,8 +4,14 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
+one:
+  notifiable: poke_one (Poke)
+  receiver: friend_two
+  type: PokeNotification
 # column: value
 #
-two: {}
+two:
+  notifiable: poke_two (Poke)
+  receiver: friend_one
+  type: PokeNotification
 # column: value
