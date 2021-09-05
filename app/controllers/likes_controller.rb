@@ -12,7 +12,7 @@ class LikesController < ApplicationController
             flash[:alert] = "Something wrent wrong liking that post."
         end
 
-        redirect_back fallback_location: "posts#index"
+        redirect_back fallback_location: posts_url
     end
 
     def destroy
@@ -25,7 +25,7 @@ class LikesController < ApplicationController
             flash[:alert] = "Something went wrong unliking post"
         end
 
-        redirect_back fallback_location: "posts#index"
+        redirect_back fallback_location: posts_url
     end
 
 end

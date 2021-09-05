@@ -16,7 +16,7 @@ class FriendRequestsController < ApplicationController
             flash[:alert] = "Something went wrong sending your request"
         end
 
-        redirect_back fallback_location: "posts#index"
+        redirect_back fallback_location: root_url
     end
 
     def update

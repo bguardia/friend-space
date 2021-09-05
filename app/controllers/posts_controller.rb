@@ -34,7 +34,7 @@ class PostsController < ApplicationController
             else
                 flash[:alert] = "Post does not exist."
             end
-            redirect_to 'index'
+            redirect_to action: 'index'
         end
     end
 
@@ -47,7 +47,7 @@ class PostsController < ApplicationController
             else
                 flash[:alert] = "Post does not exist."
             end
-            redirect_to 'index'
+            redirect_to action: 'index'
         end
 
         if @post.update(post_params)
@@ -68,11 +68,12 @@ class PostsController < ApplicationController
             else
                 flash[:alert] = "Post does not exist."
             end
-            redirect_to 'index'
+            redirect_to action: 'index'
         end
 
         @post.destroy
-        redirect_to 'index'
+        flash[:notice] = "Post successfully deleted"
+        redirect_to action: 'index'
     end
 
     private
