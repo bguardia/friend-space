@@ -1,20 +1,4 @@
 class ProfilesController < ApplicationController
-    skip_before_action :user_has_completed_profile, only: [:new, :create]
-
-    def new
-        @profile = current_user.build_profile
-    end
-
-    def create
-        @profile = current_user.build_profile(profile_params)
-        if @profile.save
-            flash[:notice] = "Successfully set up your profile"
-            redirect_to user_path(current_user)
-        else
-            flash.now[:alert] = "There was a problem setting up your profile"
-            render 'new'
-        end
-    end
 
     def edit
         @profile = current_user.profile

@@ -1,7 +1,5 @@
 class ApplicationController < ActionController::Base
     before_action :authenticate_user! 
-    before_action :user_has_completed_profile
-    #
     # helper :profile_picture_for
 
     def profile_picture_url_for(user, options)

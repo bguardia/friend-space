@@ -21,6 +21,10 @@ class User < ApplicationRecord
   has_many :friends, through: :friendships
   scope :not_friends_with, ->(user) { where.not(id: joins(:friendships).select(:friend_id).where(id: user.id)).where.not(id: user.id)}
 
+  after_create do
+    self.create_profile
+  end
+
   def from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email

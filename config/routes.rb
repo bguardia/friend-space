@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks',
-                                    registrations: 'users/registrations',
-                                    sessions: 'users/sessions' }
+                                    registrations: 'users/registrations'}
                                     
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
@@ -20,7 +19,7 @@ Rails.application.routes.draw do
   resources :pokes, only: [:create]
 
   resources :notifications, only: [:index, :update]
-  resource :profile, except: [:show, :destroy]
+  resource :profile, only: [:edit, :update]
   resolve('Profile') { [:profile] }
 
   get '/privacy-policy', controller: :privacy_policy, action: :show
