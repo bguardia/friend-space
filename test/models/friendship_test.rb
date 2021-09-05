@@ -17,4 +17,11 @@ class FriendshipTest < ActiveSupport::TestCase
     Friendship.create(user_id: user.id, friend_id: friend.id)
     assert_not_nil Friendship.find_by(user_id: friend.id, friend_id: user.id)
   end
+
+  test "deletes opposing friendship automatically" do
+    user = users(:friend_one)
+    friend = users(:friend_two)
+    Friendship.find_by(user_id: user.id, friend_id: friend.id).destroy
+    assert_nil Friendship.find_by(user_id: friend.id, friend_id: user.id)
+  end
 end
