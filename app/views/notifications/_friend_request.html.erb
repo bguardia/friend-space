@@ -30,7 +30,7 @@
             </div>
         <% else %>
             <div class="content">
-                <p>You <%= notification.notifiable.status.downcase %> <%= link_to sender_name, user_path(sender) %>'s friend request</p>
+                <p>You <%= notification.notifiable.status.downcase %> <%= link_to sender_name, user_path(sender) %>'s friend request.</p>
             </div>
         <% end %>
     </div>
