@@ -16,6 +16,10 @@
 
  @import 'bulma';
  
+ .notification:not(:last-child) {
+     margin-bottom: 0;
+ }
+
  .profile-panel {
      position: relative;
      padding-top: 69px;
