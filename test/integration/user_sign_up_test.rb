@@ -15,11 +15,15 @@ class UserSignUpTest < ActionDispatch::IntegrationTest
     assert_difference('User.count') do
       post user_registration_path, params: { user: { email: "int_test@test.jmail.com", password: "1234567", password_confirmation: "1234567"} }
     end
+    
     assert_response :redirect #Redirect to new profile page after sign-up
     follow_redirect!
     assert_response :success
 
     assert_select "h2", "Edit your Profile"
+
+    #Check welcome mail has been queued
+    assert_enqueued_emails 1
   end
 
 end
