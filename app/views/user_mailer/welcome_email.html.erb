@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Welcome to FriendSpace!</h1>
+    <p>
+    <%= @user.email %>,<br/><br/>
+    Thanks for signing up for FriendSpace.
+    </p>
+    <p>
+    If you haven't already, consider completing your profile at the link below:<br/>
+    <br/>
+    <a href="<%= @url %>">
+        Complete your Profile
+    </a>
+    </p>
+    <p>Thanks again for joining and have a good day!</p>
+    <p>
+    From, <br/><br/>
+    the FriendSpace team
+    </p>
+  </body>
+</html>

@@ -3,7 +3,13 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+    after_action :send_welcome_email, only: [:create]
 
+    def send_welcome_email
+      if current_user
+        UserMailer.with(user: current_user).welcome_email.deliver_later
+      end
+    end
   # GET /resource/sign_up
   # def new
   #   super
@@ -12,7 +18,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   # def create
   #  super
-  # end
+  #end
 
   # GET /resource/edit
   # def edit

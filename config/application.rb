@@ -27,5 +27,7 @@ module Friendspace
         end
       end
     end
+
+    config.action_mailer.default_url_options = { host: ENV["HOST_URL"]}
   end
 end
