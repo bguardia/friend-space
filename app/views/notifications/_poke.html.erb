@@ -10,7 +10,7 @@
 
     <div class="media-content">
         <div class="content">
-            <p><%= "#{poker.profile.firstname} #{poker.profile.lastname}" %> poked you.</p>
+            <p><%= link_to "#{poker.profile.firstname} #{poker.profile.lastname}", user_path(poker) %> poked you <%= time_ago_in_words(notification.notifiable.created_at) %> ago.</p>
         </div>
         <div class="level">
             <div class="level-item">
