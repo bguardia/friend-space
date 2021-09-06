@@ -33,7 +33,14 @@
     <div class="navbar-menu">
       <div class="navbar-end">
         <div class="navbar-item">
+          
+          
           <%= link_to notifications_path, class: "button is-info" do %>
+            <% if current_user && current_user.notifications.unread.count > 0 %>
+              <div class="notifications-count">
+                <%= current_user.notifications.unread.count %>
+              </div>
+            <% end %>
             <i class="fas fa-bell"></i>
           <% end %>
         </div>

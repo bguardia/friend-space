@@ -42,3 +42,18 @@
  .friend_tile--image {
      border-radius: 10%;
  }
+
+ .notifications-count {
+     width: 1.5em;
+     height: 1.5em;
+     text-align: center;
+     border-radius: 50%;
+     background-color: red;
+     position: absolute;
+     top: -.6em;
+     right: -.6em;
+ }
+
+ a:hover .notifications-count {
+     background-color: rgb(184, 2, 2);
+ }
