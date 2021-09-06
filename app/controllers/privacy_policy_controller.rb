@@ -1,5 +1,5 @@
 class PrivacyPolicyController < ApplicationController
-    skip_before_action :authenticate_user!, :user_has_completed_profile
+    skip_before_action :authenticate_user!
 
     def show
     end
