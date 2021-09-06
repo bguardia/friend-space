@@ -66,7 +66,7 @@
                     <div class="tile is-4 is-child block has-text-centered friend_tile p-1">
                         <%= link_to user_path(friend) do %>
                             <figure class="image is-square">
-                                <%= image_tag friend.profile.avatar.variant(resize_to_fill: [100,100]), class: "friend_tile--image" %>
+                                <%= image_tag friend.profile.avatar.attached? ? friend.profile.avatar.variant(resize_to_fill: [100,100]) : "https://via.placeholder.com/100", class: "friend_tile--image" %>
                             </figure>
                             <%= "#{friend.profile.firstname} #{friend.profile.lastname}" %>
                         <% end %>
