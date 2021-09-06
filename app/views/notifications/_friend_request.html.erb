@@ -37,7 +37,7 @@
     
     <div class="media-right">
         <% unless notification.status == "Read" %>
-            <%= form_with url: "notifications/#{notification.id}", method: :patch do |f| %>
+            <%= form_with url: "/notifications/#{notification.id}", method: :patch do |f| %>
                 <%= f.hidden_field :status, value: "Read" %>
                 <button type="submit" class="button">
                     <span class="icon">
@@ -46,7 +46,7 @@
                 </button>
             <% end %>
         <% end %>
-        <%= form_with url: "notifications/#{notification.id}", method: :patch do |f| %>
+        <%= form_with url: "/notifications/#{notification.id}", method: :patch do |f| %>
             <%= f.hidden_field :status, value: "Archived" %>
             <button type="submit" class="button">
                 <span class="icon">
