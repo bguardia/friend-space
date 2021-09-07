@@ -63,6 +63,17 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "friendspace_production"
 
   config.action_mailer.perform_caching = false
+  
+  ActionMailer::Base.smtp_settings = {
+    :port           => 587,
+    :address        => "smtp.gmail.com",
+    :user_name      => ENV['GMAIL_USERNAME'],
+    :password       => ENV['GMAIL_PASSWORD'],
+    :domain         => 'friend-space.heroku.com',
+    :authentication => :plain,
+  }
+  
+  ActionMailer::Base.delivery_method = :smtp  
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
