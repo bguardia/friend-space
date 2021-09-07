@@ -65,10 +65,10 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
   
   ActionMailer::Base.smtp_settings = {
-    :port           => ENV['MAILGUN_SMTP_PORT'],
-    :address        => ENV['MAILGUN_SMTP_SERVER'],
-    :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
-    :password       => ENV['MAILGUN_SMTP_PASSWORD'],
+    :port           => 587,
+    :address        => "smtp.gmail.com",
+    :user_name      => ENV['GMAIL_USERNAME'],
+    :password       => ENV['GMAIL_PASSWORD'],
     :domain         => 'friend-space.heroku.com',
     :authentication => :plain,
   }
