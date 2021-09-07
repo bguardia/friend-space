@@ -56,7 +56,7 @@
                     <%= @user.profile.firstname %>'s Friends
             </div>
             <div class="panel-block">
-                <small><%= "#{@user.profile.firstname} #{@user.profile.lastname}" %> has <%= @user.friends.count %> friends.</small>
+                <small><%= "#{@user.profile.firstname} #{@user.profile.lastname}" %> has <%= f_count = @user.friends.count %> friend<%= f_count == 1 ? "" : "s" %>.</small>
             </div>
             <div class="tile is-ancestor p-2">
                 <div class="tile is-parent is-flex-wrap-wrap">
