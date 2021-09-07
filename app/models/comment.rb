@@ -6,7 +6,9 @@ class Comment < ApplicationRecord
     validates :body, presence: true
 
     after_create do
-        self.create_comment_notification(receiver_id: self.post.user.id,
-                                         status: "Unread")
+        unless self.user == self.post.user
+            self.create_comment_notification(receiver_id: self.post.user.id,
+                                             status: "Unread")
+        end
     end
 end
