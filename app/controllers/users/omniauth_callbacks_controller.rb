@@ -9,8 +9,15 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
             set_flash_message(:notice, :success, kind: "Facebook") if is_navigational_format?
         else
             session["devise.facebook_data"] = request.env["omniauth.auth"].except(:extra)
-            redirect_to new_user_registration_url
+            if User.find_by(email: request.env["omniauth.auth"].info.email)
+                set_flash_message(:alert, :failure, kind: "Facebook", reason: "email is already in use")
+                redirect_to new_user_session_url
+            else
+                flash[:alert] = "Couldn't log in via Facebook."
+                redirect_to new_user_registration_url
+            end
         end
+
     end
 
     def failure
