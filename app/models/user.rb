@@ -41,6 +41,7 @@ class User < ApplicationRecord
         rescue Down::NotFound
           logger.info "Could not download user profile photo"
         end
+      end
     end
   end
 
