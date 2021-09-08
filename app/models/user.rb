@@ -31,8 +31,11 @@ class User < ApplicationRecord
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
-      user.build_profile(firstname: auth.info.first_name,
-                         lastname: auth.info.last_name)
+      name_arr = auth.info.name.split(" ")
+      firstname = auth.info.first_name || name_arr[0]
+      lastname = auth.info.last_name || name_arr[1]
+      user.build_profile(firstname: firstname,
+                         lastname: lastname)
       if auth.info.image
         begin
         tempfile = Down.download(auth.info.image, max_size: 5 * 1024 * 1024) #5MB
