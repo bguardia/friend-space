@@ -91,6 +91,7 @@ GEM
       warden (~> 1.2.3)
     digest-crc (0.6.4)
       rake (>= 12.0.0, < 14.0.0)
+    down (1.1.0)
     em-websocket (0.5.2)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
@@ -363,6 +364,7 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   devise (~> 4.8)
+  down (~> 1.1)
   google-cloud-storage (~> 1.34, >= 1.34.1)
   guard (~> 2.18)
   guard-livereload (~> 2.5, >= 2.5.2)

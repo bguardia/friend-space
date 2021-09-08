@@ -31,7 +31,16 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]
       user.build_profile(firstname: auth.info.first_name,
                          lastname: auth.info.last_name)
-      user.profile.avatar.attach(auth.info.image)
+      if auth.info.image
+        begin
+        tempfile = Down.download(auth.info.image, max_size: 5 * 1024 * 1024) #5MB
+        user.profile.avatar.attach(io: tempfile,
+                                   filename: tempfile.original_filename, 
+                                   content_type: tempfile.content_type)
+        File.delete(tempfile)
+        rescue Down::NotFound
+          logger.info "Could not download user profile photo"
+        end
     end
   end
 
