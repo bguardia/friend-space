@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :sent_pokes, foreign_key: "sender_id", dependent: :destroy
+  has_many :received_pokes, foreign_key: "receiver_id", dependent: :destroy
   
   has_many :notifications, foreign_key: "receiver_id", dependent: :destroy
   has_many :friend_requests, foreign_key: "receiver_id", dependent: :destroy
