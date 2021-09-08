@@ -22,7 +22,7 @@ class User < ApplicationRecord
   scope :not_friends_with, ->(user) { where.not(id: joins(:friendships).select(:friend_id).where(id: user.id)).where.not(id: user.id)}
 
   after_create do
-    self.create_profile
+    self.create_profile unless self.profile
   end
 
   def self.from_omniauth(auth)
@@ -30,8 +30,8 @@ class User < ApplicationRecord
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
       user.build_profile(firstname: auth.info.first_name,
-                          lastname: auth.info.last_name,
-                          avatar: auth.info.image)
+                         lastname: auth.info.last_name,
+                         avatar: auth.info.image)
     end
   end
 
