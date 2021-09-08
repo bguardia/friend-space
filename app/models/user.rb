@@ -30,8 +30,8 @@ class User < ApplicationRecord
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
       user.build_profile(firstname: auth.info.first_name,
-                         lastname: auth.info.last_name,
-                         avatar: auth.info.image)
+                         lastname: auth.info.last_name)
+      user.profile.avatar.attach(auth.info.image)
     end
   end
 
