@@ -16,13 +16,17 @@ class PostsController < ApplicationController
     def create
         @post = current_user.posts.build(post_params)
 
-        if @post.save
+        if attachment_is_not_image
+            flash[:alert] = "Attachment must be an image"
+        elsif @post.save
             flash[:notice] = "Successfully created post"
             redirect_to @post 
+            return
         else
             flash.now[:alert] = "Unable to create post"
-            redirect_back fallback_location: 'new'
         end
+
+        redirect_back fallback_location: 'new'
     end
 
     def edit
@@ -50,13 +54,17 @@ class PostsController < ApplicationController
             redirect_to action: 'index'
         end
 
-        if @post.update(post_params)
+        if attachment_is_not_image
+            flash.now[:alert] = "Attachment must be an image"
+        elsif @post.update(post_params)
             flash[:notice] = "Successfully updated post!"
             redirect_to @post
+            return
         else
             flash.now[:alert] = "Unable to update post"
-            render 'edit'
         end
+
+        render 'edit'
     end
 
     def destroy
@@ -79,6 +87,11 @@ class PostsController < ApplicationController
     private
     def post_params
         params.require(:post).permit(:body, :image)
+    end
+
+    private
+    def attachment_is_not_image
+        post_params[:image] && !post_params[:image].content_type.start_with?("image")
     end
 
 end
