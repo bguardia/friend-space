@@ -4,8 +4,7 @@
     <div class="level-left">
         <div class="level-item">
             <figure class="image is-64x64">
-                <% img_src = user.profile.avatar.attached? ? url_for(user.profile.avatar.variant(resize_to_fill: [64, 64])) : "https://via.placeholder.com/64" %>
-                <img src=<%= img_src %> alt="" class="is-rounded">
+                <img src=<%= profile_picture_url(user) %> alt="" class="is-rounded">
             </figure>
         </div>
         <div class="level-item">
